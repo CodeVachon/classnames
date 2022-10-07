@@ -1,6 +1,6 @@
 {
   "name": "@codevachon/classnames",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "author": {
     "email": "code@christophervachon.com",
@@ -9,12 +9,13 @@
   },
   "scripts": {
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "clean": "rm -rf ./lib ./docs",
     "build": "npm run clean && npm run build:esm && npm run build:cjs",
-    "build:esm": "tsc -p ./config/tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.mjs",
+    "build:esm": "tsc -p ./config/tsconfig.esm.json && mv lib/esm/ClassNames.js lib/esm/ClassNames.mjs",
     "build:cjs": "tsc -p ./config/tsconfig.cjs.json",
     "prepack": "npm run build",
-    "build:docs": "rm -fr docs && typedoc src/index.ts",
+    "build:docs": "rm -fr docs && typedoc src/ClassNames.ts",
     "serve:docs": "http-server ./docs",
     "preinstall": "npx only-allow pnpm"
   },
@@ -26,20 +27,20 @@
     "type": "git",
     "url": "git@github.com:CodeVachon/classnames.git"
   },
-  "types": "./lib/cjs/types/index.d.ts",
-  "main": "./lib/cjs/index.js",
+  "types": "./lib/cjs/types/ClassNames.d.ts",
+  "main": "./lib/cjs/ClassNames.js",
   "files": [
     "lib/**/*"
   ],
   "exports": {
     ".": {
       "import": {
-        "types": "./lib/esm/types/index.d.ts",
-        "default": "./lib/esm/index.mjs"
+        "types": "./lib/esm/types/ClassNames.d.ts",
+        "default": "./lib/esm/ClassNames.mjs"
       },
       "require": {
-        "types": "./lib/cjs/types/index.d.ts",
-        "default": "./lib/cjs/index.js"
+        "types": "./lib/cjs/types/ClassNames.d.ts",
+        "default": "./lib/cjs/ClassNames.js"
       }
     }
   },
@@ -47,7 +48,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=16"
   },
   "keywords": [
     "className"

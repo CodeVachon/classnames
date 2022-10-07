@@ -1,6 +1,22 @@
 # @codevachon/classnames
 
-A Library Used for managing ClassNames in Javascript
+A Library Used for managing ClassNames in Javascript.
+
+Checkout the [TypeDoc](https://codevachon.github.io/classnames/).
+
+## Install
+
+```sh
+pnpm add @codevachon/classnames
+```
+
+```sh
+yarn add @codevachon/classnames
+```
+
+```sh
+npm install @codevachon/classnames
+```
 
 ## Usage
 
