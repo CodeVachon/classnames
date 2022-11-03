@@ -300,6 +300,32 @@ class ClassNames {
     }
 
     /**
+     * Conditionally Added Classes
+     *
+     * ```ts
+     * new ClassNames().if(disabled === true, "bg-gray-100", "bg-sky-700").list();
+     * ```
+     *
+     * @param condition The If Condition
+     * @param isTrue Values to add if the Condition is True
+     * @param isFalse Values to add of the Condition is False
+     * @returns this instance
+     */
+    public if(
+        condition: boolean,
+        isTrue: ClassNameAddValue,
+        isFalse: ClassNameAddValue = ""
+    ): this {
+        if (condition) {
+            this.add(isTrue);
+        } else {
+            this.add(isFalse);
+        }
+
+        return this;
+    }
+
+    /**
      * Static accessor to add ClassNames
      *
      * **Shortcut Of** `new ClassNames().add(value)`

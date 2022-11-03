@@ -369,6 +369,26 @@ describe("ClassNames", () => {
         });
     });
 
+    describe("if", () => {
+        const baseClasses = ["Beer", "Banana"];
+        const isTrue = "true";
+        const isFalse = "false";
+
+        test("Adds the expected values when condition is true", () => {
+            const condition = true;
+            expect(new ClassNames(baseClasses).if(condition, isTrue, isFalse).list()).toContain(
+                isTrue
+            );
+        });
+
+        test("Adds the expected values when condition is false", () => {
+            const condition = false;
+            expect(new ClassNames(baseClasses).if(condition, isTrue, isFalse).list()).toContain(
+                isFalse
+            );
+        });
+    });
+
     describe("static isClassNames method", () => {
         test("returns true if value is an instance of ClassNames", () => {
             const value = ClassNames.add("me");

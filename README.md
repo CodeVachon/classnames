@@ -207,6 +207,17 @@ const list = new ClassNames()
 // list => "p-1"
 ```
 
+## If Condition
+
+as of `1.2.0` you use add an If Conditions
+
+```js
+const size = "xs";
+
+const list = new ClassNames().if(size === "xs", "rounded-sm", "rounded").list();
+// list => "rounded-sm"
+```
+
 ## Static Methods
 
 -   .add() - Alias of `new ClassNames().add()`
