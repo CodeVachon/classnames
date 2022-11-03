@@ -1,8 +1,10 @@
 export interface IConditionalClasses {
     [className: string]: boolean;
 }
-export type AddInputValue = string | string[] | ClassNames | IConditionalClasses;
+export type ClassNameAddValue = string | string[] | ClassNames;
+export type AddInputValue = ClassNameAddValue | IConditionalClasses;
 export type RemoveInputValue = string | string[] | RegExp | RegExp[];
+
 /**
  * A Class to help Manage Classes for Components
  */
@@ -266,6 +268,38 @@ class ClassNames {
     }
 
     /**
+     * Act like a Switch Case for Added Classes
+     *
+     * *Usage*
+     *
+     * ```ts
+     * new ClassNames(["rounded text-white px-4 py-2"])
+     *   .switch(btnType, {
+     *     "success": "bg-emerald-700",
+     *     "danger": "bg-red-700"
+     *   }, "bg-sky-700")
+     * ```
+     *
+     * @param onValue The the Value to Switch On
+     * @param options Object Containing Possible Values and there Keys
+     * @param defaultValue Optional Default Value
+     * @returns this instance
+     */
+    public switch(
+        onValue: string,
+        options: Record<string, ClassNameAddValue>,
+        defaultValue?: string
+    ): this {
+        if (options[onValue]) {
+            this.add(options[onValue]);
+        } else if (defaultValue !== undefined) {
+            this.add(defaultValue);
+        }
+
+        return this;
+    }
+
+    /**
      * Static accessor to add ClassNames
      *
      * **Shortcut Of** `new ClassNames().add(value)`
@@ -288,5 +322,12 @@ class ClassNames {
     }
 }
 
+/**
+ * A Short Wrapper Function to ClassNames
+ * @param values the Values passed to ClassNames
+ * @returns a String of Formatted Classes
+ */
+const cln = (values: ClassNameAddValue): string => new ClassNames(values).list();
+
 export default ClassNames;
-export { ClassNames };
+export { ClassNames, cln };

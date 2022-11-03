@@ -2,7 +2,9 @@
 
 A Library Used for managing ClassNames in Javascript.
 
-Checkout the [TypeDoc](https://codevachon.github.io/classnames/).
+-   [TypeDoc](https://codevachon.github.io/classnames/)
+-   [GitHub](https://github.com/CodeVachon/classnames)
+-   [npm](https://www.npmjs.com/package/@codevachon/classnames)
 
 ## Install
 
@@ -181,6 +183,28 @@ const values = {
 
 const list = new ClassNames(values).list();
 // list => "a c"
+```
+
+## Switch
+
+as of `1.1.0` you use a Switch like statement to change between values and set a default if the value is not found
+
+```js
+const size = "xs";
+
+const list = new ClassNames()
+    .switch(
+        size,
+        {
+            xs: "p-1",
+            sm: "p-2",
+            lg: "p-8",
+            xl: "p-12"
+        },
+        "p-4"
+    )
+    .list();
+// list => "p-1"
 ```
 
 ## Static Methods

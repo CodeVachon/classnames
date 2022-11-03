@@ -1,4 +1,4 @@
-import { ClassNames } from "./ClassNames";
+import { ClassNames, cln } from "./ClassNames";
 
 describe("ClassNames", () => {
     describe("has", () => {
@@ -342,6 +342,33 @@ describe("ClassNames", () => {
         });
     });
 
+    describe("switch", () => {
+        const baseClasses = ["Beer", "Banana"];
+        const TestValues = { Cheese: "CheeseValue", green: "bg-emerald-700" };
+        const defaultValue = "Pie";
+
+        test("Adds the expected values", () => {
+            const condition = Object.keys(TestValues)[0] as keyof typeof TestValues;
+            expect(
+                new ClassNames(baseClasses).switch(condition, TestValues, defaultValue).list()
+            ).toContain(TestValues[condition]);
+        });
+
+        test("Adds the default value when its passed and condition is not met", () => {
+            const condition = "asdf";
+            expect(
+                new ClassNames(baseClasses).switch(condition, TestValues, defaultValue).list()
+            ).toContain(defaultValue);
+        });
+
+        test("Does not add anything is not default is passed and condition is not met", () => {
+            const condition = "asdf";
+            expect(
+                new ClassNames(baseClasses).switch(condition, TestValues).list().split(" ")
+            ).not.toContain(Object.values(TestValues));
+        });
+    });
+
     describe("static isClassNames method", () => {
         test("returns true if value is an instance of ClassNames", () => {
             const value = ClassNames.add("me");
@@ -355,5 +382,12 @@ describe("ClassNames", () => {
             expect(ClassNames.isClassNames(value)).toBeBoolean();
             expect(ClassNames.isClassNames(value)).toBeFalse();
         });
+    });
+});
+
+describe("cln", () => {
+    test("returns a string", () => {
+        const values = ["p1", "p2", "p3"];
+        expect(cln(values)).toMatch(values.join(" "));
     });
 });
