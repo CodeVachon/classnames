@@ -411,3 +411,14 @@ describe("cln", () => {
         expect(cln(values)).toMatch(values.join(" "));
     });
 });
+
+describe("Real Use Cases", () => {
+    test("Switch works with TypeScript Union Generic Input", () => {
+        const opts = ["up", "down", "auto"] as const;
+        type Opts = typeof opts[number];
+
+        expect(new ClassNames().switch<Opts>(opts[2], { auto: "beer", up: "dfd" }).list()).toMatch(
+            "beer"
+        );
+    });
+});

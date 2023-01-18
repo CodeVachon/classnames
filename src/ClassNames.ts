@@ -273,25 +273,33 @@ class ClassNames {
      * *Usage*
      *
      * ```ts
-     * new ClassNames(["rounded text-white px-4 py-2"])
+     * new ClassNames<"success" | "danger">(["rounded text-white px-4 py-2"])
      *   .switch(btnType, {
      *     "success": "bg-emerald-700",
      *     "danger": "bg-red-700"
      *   }, "bg-sky-700")
      * ```
      *
+     * @typeParam T - Union of Expected Potential Values of onValue
      * @param onValue The the Value to Switch On
      * @param options Object Containing Possible Values and there Keys
      * @param defaultValue Optional Default Value
      * @returns this instance
      */
-    public switch(
-        onValue: string,
-        options: Record<string, ClassNameAddValue>,
-        defaultValue?: string
+    public switch<T extends string | number | symbol = string>(
+        onValue: string | number | symbol,
+        options: Partial<Record<T, ClassNameAddValue>>,
+        defaultValue?: ClassNameAddValue
     ): this {
-        if (options[onValue]) {
-            this.add(options[onValue]);
+        const isOption = (
+            value: keyof Record<T, ClassNameAddValue> | string | number | symbol,
+            options: Partial<Record<T, ClassNameAddValue>>
+        ): value is keyof Record<T, ClassNameAddValue> => {
+            return options.hasOwnProperty(value);
+        };
+
+        if (isOption(onValue, options)) {
+            this.add(options[onValue] || "");
         } else if (defaultValue !== undefined) {
             this.add(defaultValue);
         }

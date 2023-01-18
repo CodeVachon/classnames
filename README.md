@@ -207,6 +207,27 @@ const list = new ClassNames()
 // list => "p-1"
 ```
 
+as of `1.3.0` you can pass a `UNION` generic to help populate the options object
+
+```ts
+const size = "xs";
+type Size = "xs" | "sm" | "lg" | "xl" | "default";
+
+const list = new ClassNames()
+    .switch<Size>(
+        size,
+        {
+            xs: "p-1",
+            sm: "p-2",
+            lg: "p-8",
+            xl: "p-12"
+        },
+        "p-4"
+    )
+    .list();
+// list => "p-1"
+```
+
 ## If Condition
 
 as of `1.2.0` you use add an If Conditions
