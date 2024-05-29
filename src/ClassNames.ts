@@ -1,14 +1,30 @@
+/**
+ * an Object to help Manage Classes for Components. If the value of a key is `true` then the key will be added to the class list.
+ */
 export interface IConditionalClasses {
     [className: string]: boolean;
 }
+
+/**
+ * Valid Values to Add to a ClassNames Instance
+ */
 export type ClassNameAddValue = string | string[] | ClassNames;
+/**
+ * Valid Values to Add to a ClassNames Instance
+ */
 export type AddInputValue = ClassNameAddValue | IConditionalClasses;
+/**
+ * Valid Values to Remove from a ClassNames Instance
+ */
 export type RemoveInputValue = string | string[] | RegExp | RegExp[];
 
 /**
  * A Class to help Manage Classes for Components
  */
 class ClassNames {
+    /**
+     * Stores the Classes in this Instance
+     */
     private classes: string[] = [];
 
     /**
@@ -39,12 +55,21 @@ class ClassNames {
         return false;
     }
 
+    /**
+     * Instantiates a new ClassNames Instance
+     * @param classes default values to add
+     */
     constructor(...classes: AddInputValue[]) {
         if (classes) {
             classes.forEach((value) => this.add(value));
         }
     }
 
+    /**
+     * Validate if the provided value is an Array
+     * @param value value to check
+     * @returns if value is an array
+     */
     private isArray(value: any): value is [] {
         if (value instanceof Array) {
             return true;
@@ -52,6 +77,11 @@ class ClassNames {
         return false;
     }
 
+    /**
+     * Convert the provided value to an Array
+     * @param value value to convert
+     * @returns the value as an array
+     */
     private makeArray<T = any>(value: T | T[]): T[] {
         const splitRegEx = new RegExp("\\s{1,}", "g");
         let output: any[] = [];
