@@ -26,7 +26,7 @@
   "homepage": "https://codevachon.github.io/classnames/",
   "repository": {
     "type": "git",
-    "url": "git@github.com:CodeVachon/classnames.git"
+    "url": "git+ssh://git@github.com/CodeVachon/classnames.git"
   },
   "types": "./lib/cjs/types/ClassNames.d.ts",
   "main": "./lib/cjs/ClassNames.js",
