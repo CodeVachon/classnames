@@ -14,7 +14,7 @@ class ClassNames {
     /**
      * Returns the number of values in this instance
      */
-    public get length() {
+    public get length(): number {
         return this.classes.length;
     }
 
@@ -23,7 +23,7 @@ class ClassNames {
      *
      * **Alias** of `.list()`
      */
-    public toString() {
+    public toString(): string {
         return this.list();
     }
 
@@ -207,7 +207,7 @@ class ClassNames {
     /**
      * Check if this instance is empty
      */
-    public isEmpty() {
+    public isEmpty(): boolean {
         return this.length === 0;
     }
 
@@ -340,7 +340,7 @@ class ClassNames {
      * @param value classes to add to new instance of ClassNames
      * @returns an Instance of ClassNames
      */
-    public static add(value: AddInputValue) {
+    public static add(value: AddInputValue): ClassNames {
         return new ClassNames(value);
     }
 
@@ -351,7 +351,7 @@ class ClassNames {
      * @param value value to check
      * @returns if the provided value is an instance of ClassNames
      */
-    public static isClassNames(value: any) {
+    public static isClassNames(value: any): boolean {
         return new ClassNames().isClassNames(value);
     }
 }
